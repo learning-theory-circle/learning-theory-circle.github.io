@@ -17,7 +17,15 @@
 #
 #  The three entries below are placeholders — edit or delete them.
 # =============================================================
-
+- date: 2026-08-16
+  presenter: Shayan Shahrabi-Farahani
+  affiliation: Shahid Beheshti University
+  title: "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks"
+  paper: https://arxiv.org/abs/1803.03635
+  # poster: "assets/posters/shayan-shahrabi-farahani-2026-aug-16.png"
+  # slides: "assets/slides/shayan-shahrabi-farahani-2026-aug-16.pdf"
+  # video: "https://youtu.be/8z3oVPGt3eA"
+  # abstract: "Neural networks often contain millions of parameters. But do they really need all of them? This paper argues that, hidden inside a randomly initialized network, there may already exist a small "winning ticket" capable of reaching the same accuracy as the full model when trained in isolation. It's a simple idea with far-reaching implications for pruning, efficiency, and our understanding of why deep learning works."
 - date: 2026-08-02
   presenter: Erfan Sobhaei
   affiliation: Sharif University of Technology
