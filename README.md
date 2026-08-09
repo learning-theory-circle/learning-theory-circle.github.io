@@ -10,21 +10,18 @@ Edit **`_data/talks.yml`** and add one entry (see the comments at the top of tha
 ```yaml
 - date: 2026-08-19
   presenter: Jane Doe
-  presenter_url: https://example.com/jane-doe  # optional
+  presenter_url: https://example.com/jane-doe    # optional
   affiliation: Some University
   title: "A Great Paper Title"
   paper: https://arxiv.org/abs/xxxx.xxxxx
   authors: Doe, Smith
-  poster: /assets/posters/2026-08-19.png  # optional
-  slides: /assets/slides/2026-08-19.pdf   # optional
-  video: https://youtu.be/XXXXXXX         # optional
-  abstract: "One or two sentences."       # optional
+  poster: /assets/posters/2026-08-19.png         # optional
+  slides: /assets/slides/2026-08-19.pdf          # optional
+  video: https://youtu.be/XXXXXXX                # optional
+  abstract: "One or two sentences."              # optional
 ```
 
 The site sorts by `date` and splits entries into **Upcoming** and **Past** automatically. To host slides in the repo, drop the PDF in `assets/slides/` and point `slides:` at it. To host a poster, drop the image or PDF in `assets/posters/` and point `poster:` at it.
-
-> Note: GitHub Pages only rebuilds when you push, so a talk moves from
-> "Upcoming" to "Past" on the next push after its date (not automatically at midnight).
 
 
 ## Fill in before launch

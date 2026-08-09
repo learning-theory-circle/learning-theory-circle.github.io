@@ -4,20 +4,21 @@
 #  splits entries into "Upcoming" and "Past" automatically.
 #
 #  Fields:
-#    date         (required)  YYYY-MM-DD
-#    presenter    (required)  who is presenting
-#    presenter_url (optional) personal webpage for the presenter
-#    affiliation  (optional)  their institution / group
-#    title        (required)  paper title
-#    paper        (optional)  URL to the paper (arXiv, OpenReview, ...)
-#    authors      (optional)  paper authors (esp. if presenting others' work)
-#    poster       (optional)  URL, or local path like /assets/posters/2026-08-05.png
-#    slides       (optional)  URL, or local path like /assets/slides/2026-08-05.pdf
-#    video        (optional)  YouTube (or other) URL
-#    abstract     (optional)  one or two sentences
+#    date          (required)  YYYY-MM-DD
+#    presenter     (required)  who is presenting
+#    presenter_url (optional)  personal webpage for the presenter
+#    affiliation   (optional)  their institution / group
+#    title         (required)  paper title
+#    paper         (optional)  URL to the paper (arXiv, OpenReview, ...)
+#    authors       (optional)  paper authors (esp. if presenting others' work)
+#    poster        (optional)  URL, or local path like /assets/posters/2026-08-05.png
+#    slides        (optional)  URL, or local path like /assets/slides/2026-08-05.pdf
+#    video         (optional)  YouTube (or other) URL
+#    abstract      (optional)  one or two sentences
 #
 #  The three entries below are placeholders — edit or delete them.
 # =============================================================
+
 - date: 2026-08-16
   presenter: Shayan Shahrabi-Farahani
   presenter_url: https://shayanshahrabi.github.io/
@@ -28,6 +29,7 @@
   # slides: "assets/slides/shayan-shahrabi-farahani-2026-aug-16.pdf"
   # video: "https://youtu.be/8z3oVPGt3eA"
   # abstract: "Neural networks often contain millions of parameters. But do they really need all of them? This paper argues that, hidden inside a randomly initialized network, there may already exist a small "winning ticket" capable of reaching the same accuracy as the full model when trained in isolation. It's a simple idea with far-reaching implications for pruning, efficiency, and our understanding of why deep learning works."
+
 - date: 2026-08-02
   presenter: Erfan Sobhaei
   presenter_url: https://www.linkedin.com/in/erfansobhaei/
@@ -62,7 +64,6 @@
   video: "https://youtu.be/tFQUjv0z8h4"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
 
-
 - date: 2026-07-12
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
@@ -73,7 +74,6 @@
   slides: "assets/slides/erfan-mirzaei-2026-jul-12.pdf"
   video: "https://youtu.be/7uOzUt8m9dU"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
-
 
 - date: 2026-07-11
   presenter: Erfan Mirzaei

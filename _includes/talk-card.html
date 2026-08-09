@@ -2,7 +2,7 @@
 <div class="talk-card">
   <div class="talk-card-header">
     <span class="talk-presenter">
-      {% if t.presenter_url and t.presenter_url != blank %}
+      {% if t.presenter_url %}
         <a href="{{ t.presenter_url }}">{{ t.presenter }}</a>
       {% else %}
         {{ t.presenter }}
