@@ -6,6 +6,7 @@
 #  Fields:
 #    date         (required)  YYYY-MM-DD
 #    presenter    (required)  who is presenting
+#    presenter_url (optional) personal webpage for the presenter
 #    affiliation  (optional)  their institution / group
 #    title        (required)  paper title
 #    paper        (optional)  URL to the paper (arXiv, OpenReview, ...)
@@ -19,6 +20,7 @@
 # =============================================================
 - date: 2026-08-16
   presenter: Shayan Shahrabi-Farahani
+  presenter_url: https://shayanshahrabi.github.io/
   affiliation: Shahid Beheshti University
   title: "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks"
   paper: https://arxiv.org/abs/1803.03635
@@ -28,6 +30,7 @@
   # abstract: "Neural networks often contain millions of parameters. But do they really need all of them? This paper argues that, hidden inside a randomly initialized network, there may already exist a small "winning ticket" capable of reaching the same accuracy as the full model when trained in isolation. It's a simple idea with far-reaching implications for pruning, efficiency, and our understanding of why deep learning works."
 - date: 2026-08-02
   presenter: Erfan Sobhaei
+  presenter_url: https://www.linkedin.com/in/erfansobhaei/
   affiliation: Sharif University of Technology
   title: "A Modern Take on the Bias-Variance Tradeoff in Neural Networks"
   paper: https://arxiv.org/abs/1810.08591 
@@ -39,6 +42,7 @@
 
 - date: 2026-07-26
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 6"
   paper: https://arxiv.org/abs/2510.06028
@@ -49,6 +53,7 @@
 
 - date: 2026-07-19
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 5"
   paper: https://arxiv.org/abs/2510.06028
@@ -60,6 +65,7 @@
 
 - date: 2026-07-12
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 4"
   paper: https://arxiv.org/abs/2510.06028
@@ -71,6 +77,7 @@
 
 - date: 2026-07-11
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 3"
   paper: https://arxiv.org/abs/2510.06028
@@ -81,6 +88,7 @@
 
 - date: 2026-07-05
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 2"
   paper: https://arxiv.org/abs/2510.06028
@@ -91,6 +99,7 @@
 
 - date: 2026-07-04
   presenter: Erfan Mirzaei
+  presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 1"
   paper: https://arxiv.org/abs/2510.06028

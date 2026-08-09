@@ -10,6 +10,7 @@ Edit **`_data/talks.yml`** and add one entry (see the comments at the top of tha
 ```yaml
 - date: 2026-08-19
   presenter: Jane Doe
+  presenter_url: https://example.com/jane-doe  # optional
   affiliation: Some University
   title: "A Great Paper Title"
   paper: https://arxiv.org/abs/xxxx.xxxxx
