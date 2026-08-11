@@ -20,6 +20,18 @@
 # =============================================================
 
 - date: 2026-08-16
+  presenter: M. Mahdi Mostafaei
+  presenter_url: https://www.linkedin.com/in/m-mahdi-mostafaei/
+  affiliation: Shahid Beheshti University
+  title: "Why Does SGD Prefer Flat Minima? Through the Lens of Dynamical Systems"
+  paper: https://openreview.net/pdf/3dbe452fac989218cf8b8218e3f23f77352e00ba.pdf
+  authors: Hikaru Ibayashi, Masaaki Imaizumi
+  poster: "assets/posters/mahdi-mostafaei-2026-aug-16.png"
+  # slides: "assets/slides/shayan-shahrabi-farahani-2026-aug-16.pdf"
+  # video: "https://youtu.be/8z3oVPGt3eA"
+  # abstract: "We show that stochastic gradient descent (SGD) escapes sharp minima exponentially fast, even before reaching stationarity. While SGD is the standard optimizer for non-convex tasks like neural networks, its ability to find generalizable solutions remains unclear. Escaping analysis which measures how quickly SGD leaves poorly generalizing sharp minima has been insightful but previously required stationarity. In this work, we prove exponential escape in the non-stationary regime using Large Deviation Theory. Specifically, we identify the quasipotential as a key tool for characterizing SGD dynamics throughout training."
+
+- date: 2026-08-30
   presenter: Shayan Shahrabi-Farahani
   presenter_url: https://shayanshahrabi.github.io/
   affiliation: Shahid Beheshti University
@@ -49,6 +61,7 @@
   title: "PAC-Bayesian Mini-Course, Session 6"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-26.pdf"
   video: "https://youtu.be/ZG5iv-kHQx8"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
@@ -60,6 +73,7 @@
   title: "PAC-Bayesian Mini-Course, Session 5"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-19.pdf"
   video: "https://youtu.be/tFQUjv0z8h4"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
@@ -71,6 +85,7 @@
   title: "PAC-Bayesian Mini-Course, Session 4"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-12.pdf"
   video: "https://youtu.be/7uOzUt8m9dU"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
@@ -82,6 +97,7 @@
   title: "PAC-Bayesian Mini-Course, Session 3"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-11.pdf"
   video: "https://youtu.be/jr0MZID1hSQ"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
@@ -93,6 +109,7 @@
   title: "PAC-Bayesian Mini-Course, Session 2"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-5.pdf"
   video: "https://youtu.be/MCkobNxThjE"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
@@ -104,6 +121,7 @@
   title: "PAC-Bayesian Mini-Course, Session 1"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-4.pdf"
   video: "https://youtu.be/QDX_adPDq0I"
   abstract: "Overparameterized neural networks can fit both meaningful data and random labels, often achieving essentially zero training error in both cases. This makes the final training error a poor predictor of generalization in the interpolation regime. In this talk, I will present a data-dependent view of this problem based on Gibbs posteriors and Langevin Monte Carlo algorithms using the PAC-Bayes framework. The key idea is to look not only at the final interpolating model but also at the entire temperature path: how quickly the expected training loss decreases as the inverse temperature increases. We show that, for the Gibbs posterior, the PAC-Bayes complexity term admits an exact integral representation as an area under this mean training-loss curve. This area separates true-label learning from random-label memorization and leads to quantitative bounds that track the observed test error in overparameterized neural networks."
