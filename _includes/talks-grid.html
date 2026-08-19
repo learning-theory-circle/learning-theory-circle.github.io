@@ -1,28 +1,14 @@
-{% assign sorted = site.data.talks | sort: "date" %}
-{% assign today = site.time | date: "%Y%m%d" | plus: 0 %}
-
 <h2>Upcoming Talks</h2>
-<div class="talk-grid">
-  {% assign has_upcoming = false %}
-  {% for talk in sorted %}
-    {% assign ts = talk.date | date: "%Y%m%d" | plus: 0 %}
-    {% if ts >= today %}
-      {% assign has_upcoming = true %}
-      {% include talk-card.html talk=talk %}
-    {% endif %}
-  {% endfor %}
-  {% unless has_upcoming %}
-    <p class="talk-muted">Nothing scheduled yet.</p>
-  {% endunless %}
-</div>
+<div id="upcoming-talks" class="talk-grid"></div>
 
 <h2>Past Talks</h2>
-<div class="talk-grid">
-  {% assign sorted_desc = sorted | reverse %}
-  {% for talk in sorted_desc %}
-    {% assign ts = talk.date | date: "%Y%m%d" | plus: 0 %}
-    {% if ts < today %}
-      {% include talk-card.html talk=talk %}
-    {% endif %}
-  {% endfor %}
+<div id="past-talks" class="talk-grid"></div>
+
+<div id="all-talks" style="display: none;">
+  {%- assign sorted = site.data.talks | sort: "date" -%}
+  {%- for talk in sorted -%}
+    {%- include talk-card.html talk=talk -%}
+  {%- endfor -%}
 </div>
+
+<script src="{{ '/assets/js/talks.js' | relative_url }}"></script>

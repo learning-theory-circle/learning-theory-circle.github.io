@@ -12,6 +12,6 @@ We are a community of students and researchers interested in theoretical foundat
 
 ## When and Where
 
-**Every two weeks on Sunday, 7:00 pm Tehran time**, or equivalently UTC+3:30, we meet on [**Google Meet**]({{ site.meet_url }}). You can add the event to your [**Google Calendar**]({{ site.google_calendar_url }}).
+Every two weeks on Sunday, 7:00 pm Tehran time, or equivalently UTC+3:30, we meet on [Google Meet]({{ site.meet_url }}). You can add the event to your [Google Calendar]({{ site.google_calendar_url }}).
 
 {% include talks-grid.html %}

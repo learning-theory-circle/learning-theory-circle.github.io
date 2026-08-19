@@ -23,7 +23,7 @@ Topics of the talks include, but are not limited to, optimization and training d
 
 Everyone is welcome to present. There are two ways to sign up.
 
-1. **Open a pull request** on [GitHub]({{ site.github_url }}), adding an entry to `_data/talks.yml`.
+1. Open a pull request on [GitHub]({{ site.github_url }}), adding an entry to `_data/talks.yml`.
 2. Email us at [{{ site.contact_email }}](mailto:{{ site.contact_email }}).
 
 
