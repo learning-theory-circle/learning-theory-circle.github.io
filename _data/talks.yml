@@ -35,6 +35,7 @@
   paper: https://openreview.net/pdf/3dbe452fac989218cf8b8218e3f23f77352e00ba.pdf
   authors: Hikaru Ibayashi, Masaaki Imaizumi
   poster: "assets/posters/mahdi-mostafaei-2026-aug-16.png"
+  video: "https://youtu.be/Kp-tXx1AMBE?si=SE_cGPZDE8p6_C7W"
   abstract: "We show that stochastic gradient descent (SGD) escapes sharp minima exponentially fast, even before reaching stationarity. While SGD is the standard optimizer for non-convex tasks like neural networks, its ability to find generalizable solutions remains unclear. Escaping analysis which measures how quickly SGD leaves poorly generalizing sharp minima has been insightful but previously required stationarity. In this work, we prove exponential escape in the non-stationary regime using Large Deviation Theory. Specifically, we identify the quasipotential as a key tool for characterizing SGD dynamics throughout training."
 
 - date: 2026-08-02
