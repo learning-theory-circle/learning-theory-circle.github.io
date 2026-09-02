@@ -26,6 +26,7 @@
   title: "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks"
   paper: https://arxiv.org/abs/1803.03635
   poster: "assets/posters/shayan-shahrabi_farahani-2026-aug-30.png"
+  slides: "assets/slides/shayan-shahrabi-farahani-2026-aug-30.pdf"
   abstract: "Neural networks often contain millions of parameters. But do they really need all of them? This paper argues that, hidden inside a randomly initialized network, there may already exist a small winning ticket capable of reaching the same accuracy as the full model when trained in isolation. It's a simple idea with far-reaching implications for pruning, efficiency, and our understanding of why deep learning works."
 
 - date: 2026-08-16
