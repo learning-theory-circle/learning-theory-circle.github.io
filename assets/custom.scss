@@ -93,8 +93,6 @@
   }
 }
 
-/* Responsive tweak, stack vertically on narrow screens. */
-
 @media (max-width: 600px) {
   .site-footer .footer-flex {
     flex-direction: column;
@@ -110,6 +108,8 @@
   }
 }
 
+/* Other stylings */
+
 .page-content {
   padding: 0.75rem;
 }
@@ -122,4 +122,8 @@
 .site-header {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+}
+
+ul {
+    margin-left: 0.85rem;
 }

@@ -16,8 +16,14 @@
 #    video         (optional)  YouTube (or other) URL
 #    abstract      (optional)  one or two sentences
 #
-#  The three entries below are placeholders — edit or delete them.
 # =============================================================
+
+- date: 2026-09-13
+  presenter: Hosein Rahnama
+  presenter_url: https://www.linkedin.com/in/hosein-rahnama
+  title: Convergence Analysis of SGD in Convex Optimization Problems
+  book: https://www.di.ens.fr/~fbach/ltfp
+  abstract: "As its name suggests, stochastic gradient descent (SGD) is a stochastic version of the gradient descent algorithm. Gradient descent is a greedy algorithm that locally decreases the value of the objective function by moving in the direction of its negative gradient, with the aim of eventually reaching a local or global minimum. In its stochastic version, the direction of movement is a random vector, which we expect its average to point in the direction of the negative gradient, or more generally, in the direction of the negative of a vector in the subdifferential of the function. Our goal is to provide a precise formulation of this general idea and to study the convergence of the algorithm for convex functions. We begin with Lipschitz convex objective functions and then extend the results to strongly convex functions. Finally, we consider an application of the method to regularized empirical risk minimization problems arising in machine learning."
 
 - date: 2026-08-30
   presenter: Shayan Shahrabi-Farahani
@@ -82,7 +88,7 @@
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 4"
-  paper: https://arxiv.org/abs/2110.11216
+  notes: https://arxiv.org/abs/2110.11216
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-12.pdf"
@@ -94,7 +100,7 @@
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 3"
-  paper: https://arxiv.org/abs/2110.11216
+  notes: https://arxiv.org/abs/2110.11216
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-11.pdf"
@@ -106,7 +112,7 @@
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 2"
-  paper: https://arxiv.org/abs/2110.11216
+  notes: https://arxiv.org/abs/2110.11216
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-5.pdf"
@@ -118,7 +124,7 @@
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
   title: "PAC-Bayesian Mini-Course, Session 1"
-  paper: https://arxiv.org/abs/2110.11216
+  notes: https://arxiv.org/abs/2110.11216
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-4.pdf"
