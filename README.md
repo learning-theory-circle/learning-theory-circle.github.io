@@ -8,13 +8,16 @@ We are a community of students and researchers who share a passion for the theor
 Edit **`_data/talks.yml`** and add one entry (see the comments at the top of that file for all available fields):
 
 ```yaml
-- date: 2026-08-19
-  presenter: Jane Doe
+- date: 2026-08-19                               # required
+  presenter: Jane Doe                            # required
   presenter_url: https://example.com/jane-doe    # optional
-  affiliation: Some University
-  title: "A Great Paper Title"
-  paper: https://arxiv.org/abs/xxxx.xxxxx
-  authors: Doe, Smith
+  affiliation: Some University                   # optional
+  title: "A Great Paper Title"                   # requried
+  session: "1"                                   # optional
+  paper: https://example.com/paper               # optional
+  notes: https://example.com/notes               # optional
+  book: https://example.com/book                 # optional
+  authors: Doe, Smith                            # optional
   poster: /assets/posters/2026-08-19.png         # optional
   slides: /assets/slides/2026-08-19.pdf          # optional
   video: https://youtu.be/XXXXXXX                # optional

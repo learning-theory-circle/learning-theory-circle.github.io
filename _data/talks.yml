@@ -6,11 +6,13 @@
 #  Fields:
 #    date          (required)  YYYY-MM-DD
 #    presenter     (required)  who is presenting
-#    title         (required)  paper title
 #    presenter_url (optional)  personal webpage for the presenter
-#    affiliation   (optional)  their institution / group
+#    affiliation   (optional)  their institution
+#    title         (required)  paper title
+#    session       (optional)  session number or identifier for multi-part talks
 #    paper         (optional)  URL to the paper (arXiv, OpenReview, ...)
-#    authors       (optional)  paper authors (esp. if presenting others' work)
+#    notes         (optional)  URL to the notes used in the talk
+#    book          (optional)  URL to the book used in the talk
 #    poster        (optional)  URL, or local path like /assets/posters/2026-08-05.png
 #    slides        (optional)  URL, or local path like /assets/slides/2026-08-05.pdf
 #    video         (optional)  YouTube (or other) URL
@@ -63,7 +65,8 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 6"
+  title: "PAC-Bayesian Mini-Course"
+  session: "6"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
@@ -75,7 +78,8 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 5"
+  title: "PAC-Bayesian Mini-Course"
+  session: "5"
   paper: https://arxiv.org/abs/2510.06028
   authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
@@ -87,9 +91,10 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 4"
+  title: "PAC-Bayesian Mini-Course"
+  session: "4"
   notes: https://arxiv.org/abs/2110.11216
-  authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  authors: Pierre Alquier
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-12.pdf"
   video: "https://youtu.be/7uOzUt8m9dU"
@@ -99,9 +104,10 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 3"
+  title: "PAC-Bayesian Mini-Course"
+  session: "3"
   notes: https://arxiv.org/abs/2110.11216
-  authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  authors: Pierre Alquier
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-11.pdf"
   video: "https://youtu.be/jr0MZID1hSQ"
@@ -111,9 +117,10 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 2"
+  title: "PAC-Bayesian Mini-Course"
+  session: "2"
   notes: https://arxiv.org/abs/2110.11216
-  authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  authors: Pierre Alquier
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-5.pdf"
   video: "https://youtu.be/MCkobNxThjE"
@@ -123,9 +130,10 @@
   presenter: Erfan Mirzaei
   presenter_url: https://erfunmirzaei.github.io/
   affiliation: Italian Institute of Technology
-  title: "PAC-Bayesian Mini-Course, Session 1"
+  title: "PAC-Bayesian Mini-Course"
+  session: "1"
   notes: https://arxiv.org/abs/2110.11216
-  authors: Andreas Maurer, Erfan Mirzaei, Massimiliano Pontil
+  authors: Pierre Alquier
   poster: "assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
   slides: "assets/slides/erfan-mirzaei-2026-jul-4.pdf"
   video: "https://youtu.be/QDX_adPDq0I"
