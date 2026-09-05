@@ -37,6 +37,7 @@
 
 .talk-main {
   flex: 1;
+  margin: 0 0 0.5rem 0
 }
 
 .talk-card-header {
@@ -46,10 +47,11 @@
 }
 
 .talk-title {
-  margin: 0.5rem 0 1rem 0;
+  margin: 0;
 }
 
 .talk-links {
+font-size: 0.8rem;
   margin-top: auto;
   display: flex;
   gap: 1rem;
@@ -65,6 +67,12 @@
   font-style: italic;
 }
 
+.talk-session {
+   color: #f364e2;
+   font-size: 0.8rem;
+   margin: 0;
+   font-weight: bold;
+ }
 
 /* Footer styling */
 
