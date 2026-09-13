@@ -26,6 +26,7 @@
   title: Convergence Analysis of SGD in Convex Optimization Problems
   session: "1"
   book: https://www.di.ens.fr/~fbach/ltfp
+  notes: "assets/notes/hosein-rahnama-2026-sep-13.pdf"
   poster: "assets/posters/hosein-rahnama-2026-sep-13.png"
   abstract: "As its name suggests, stochastic gradient descent (SGD) is a stochastic version of the gradient descent algorithm. Gradient descent is a greedy algorithm that locally decreases the value of the objective function by moving in the direction of its negative gradient, with the aim of eventually reaching a local or global minimum. In its stochastic version, the direction of movement is a random vector, which we expect its average to point in the direction of the negative gradient, or more generally, in the direction of the negative of a vector in the subdifferential of the function. Our goal is to provide a precise formulation of this general idea and to study the convergence of the algorithm for convex functions. We begin with Lipschitz convex objective functions and then extend the results to strongly convex functions. Finally, we consider an application of the method to regularized empirical risk minimization problems arising in machine learning."
 
