@@ -1,29 +1,28 @@
-{%- assign t = include.talk -%}
+{%- assign talk = include.talk -%}
 <div class="talk-card">
   <div class="talk-card-header">
     <span class="talk-presenter">
-      {%- if t.presenter_url -%}
-        <a href="{{ t.presenter_url }}">{{ t.presenter }}</a>
+      {%- if talk.presenter_url -%}
+        <a href="{{ talk.presenter_url }}">{{ talk.presenter }}</a>
       {%- else -%}
-        {{ t.presenter }}
+        {{ talk.presenter }}
       {%- endif -%}
     </span>
-    <span class="talk-date" data-date="{{ t.date | date: '%Y-%m-%d' }}">{{ t.date | date: "%b %-d, %Y" }}</span>
+    <span class="talk-date" data-date="{{ talk.date | date: '%Y-%m-%d' }}">{{ talk.date | date: "%b %-d, %Y" }}</span>
   </div>
   <div class="talk-card-body">
     <div class="talk-main">
-      <p class="talk-title">{{ t.title }}</p>
-      {%- if t.session -%}
-        <span class="talk-session">Session {{ t.session }}</span>
+      <p class="talk-title">{{ talk.title }}</p>
+      {%- if talk.session -%}
+        <span class="talk-session">Session {{ talk.session }}</span>
       {%- endif -%}
     </div>
     <div class="talk-links">
-      {%- if t.poster -%}<span><a href="{{ t.poster }}">poster</a></span>{%- endif -%}
-      {%- if t.paper -%}<span><a href="{{ t.paper }}">paper</a></span>{%- endif -%}
-      {%- if t.book -%}<span><a href="{{ t.book }}">book</a></span>{%- endif -%}
-      {%- if t.notes -%}<span><a href="{{ t.notes }}">notes</a></span>{%- endif -%}
-      {%- if t.slides -%}<span><a href="{{ t.slides }}">slides</a></span>{%- endif -%}
-      {%- if t.video -%}<span><a href="{{ t.video }}">video</a></span>{%- endif -%}
+      {%- if talk.paper -%}<span><a href="{{ talk.paper }}">paper</a></span>{%- endif -%}
+      {%- if talk.book -%}<span><a href="{{ talk.book }}">book</a></span>{%- endif -%}
+      {%- if talk.notes -%}<span><a href="{{ talk.notes }}">notes</a></span>{%- endif -%}
+      {%- if talk.slides -%}<span><a href="{{ talk.slides }}">slides</a></span>{%- endif -%}
+      {%- if talk.video -%}<span><a href="{{ talk.video }}">video</a></span>{%- endif -%}
     </div>
   </div>
 </div>

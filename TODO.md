@@ -7,3 +7,5 @@ The following is a list of further improvements for the website.
 [x] Consider showing the talks details in cards instead of tables. This has the advantage of taking less space, while allowing better reponsiveness on devices with different screen size.
 
 [ ] Add `show more` at the end of past talks.
+
+[ ] Add a search feature.

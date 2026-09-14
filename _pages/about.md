@@ -24,11 +24,11 @@ Topics of the talks include, but are not limited to generalization, optimization
 ## Present a Topic
 
 Everyone is welcome to present. There are two steps to sign up.
-- Email us at [{{ site.contact_email }}](mailto:{{ site.contact_email }}).
-- Open a pull request on [GitHub]({{ site.github_url }}), adding an entry to `_data/talks.yml`.
+- Email us at [{{ site.data.circle.contact_email }}](mailto:{{ site.data.circle.contact_email }}).
+- Open a pull request on [GitHub]({{ site.data.circle.github_url }}), adding an entry to `_data/talks.yml`.
 
 
 ## Stay in the Loop
 
-- Join the [mailing list]({{ site.mailing_list_url }}) for announcements.
-- Watch past sessions on [YouTube]({{ site.youtube_playlist_url }}).
+- Join the [mailing list]({{ site.data.circle.mailing_list_url }}) for announcements.
+- Watch past sessions on [YouTube]({{ site.data.circle.youtube_playlist_url }}).

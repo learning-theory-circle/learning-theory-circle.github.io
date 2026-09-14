@@ -1,49 +1,23 @@
-# ============================================================
-#  Learning Theory Circle — site configuration
-# ============================================================
+#  Site Configuration
 
 title: Learning Theory Circle
 description: >-
   A community of students and researchers who share a passion for the theory of learning
 
-# --- URL / hosting -------------------------------------------------
-# Case A (recommended): dedicated user/org site served at
-#   https://learning-theory-circle.github.io
-#   -> leave baseurl empty (as below) and set url accordingly.
-#
-# Case B: a project repo under your personal account, served at
-#   https://<your-username>.github.io/learning-theory-circle
-#   -> set   baseurl: "/learning-theory-circle"
-#   -> set   url:     "https://<your-username>.github.io"
+# URL
 baseurl: ""
 url: "https://learning-theory-circle.github.io"
 
-# --- Theme ---------------------------------------------------------
+# Theme
 theme: minima
 minima:
-  skin: classic    # options: classic, dark, auto, solarized, solarized-dark
+  skin: classic
 
-# --- Top navigation ------------------------------------------------
+# Top Navigation
 header_pages:
   - about.md
 
-# --- Optional integrations (leave "" to hide them on the site) -----
-organizers:
-  - name: Erfan Mirzaei
-    url: https://erfunmirzaei.github.io
-  - name: Hosein Rahnama
-    url: https://www.linkedin.com/in/hosein-rahnama
-  - name: M. Mahdi Mostafaei
-    url: https://github.com/MMahdiMostafaei
-
-contact_email: "learning-theory-circle@googlegroups.com"
-mailing_list_url: "https://groups.google.com/g/learning-theory-circle"
-youtube_playlist_url: "https://www.youtube.com/playlist?list=PLbvD9bdnxAes"
-meet_url: "https://meet.google.com/csa-sbkw-ctm"
-google_calendar_url: "https://calendar.google.com/calendar/u/0/r?cid=0fe4616e790575cc4fc5ed4c31d84c0188e5c7911ed0ad6fb2ca339b171b3f2f@group.calendar.google.com"
-github_url: https://github.com/learning-theory-circle/learning-theory-circle.github.io
-
-# --- Build ---------------------------------------------------------
+# Build
 plugins:
   - jekyll-feed
 show_excerpts: false
@@ -57,4 +31,4 @@ exclude:
 collections:
   pages:
     output: true
-    permalink: /:name/
+    permalink: /:name

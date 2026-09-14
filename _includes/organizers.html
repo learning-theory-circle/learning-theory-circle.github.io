@@ -1,5 +1,4 @@
-{%- if site.organizers -%}
-{%- for organizer in site.organizers -%}
+{%- for organizer in site.data.circle.organizers -%}
   {%- if forloop.first == false -%}, {% else %} {% endif -%}
   {%- if organizer.url -%}
     <a href="{{ organizer.url }}">{{ organizer.name }}</a>
@@ -7,4 +6,3 @@
     {{ organizer.name | default: organizer }}
   {%- endif -%}
 {%- endfor -%}
-{%- endif -%}

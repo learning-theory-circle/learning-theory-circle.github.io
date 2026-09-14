@@ -1,10 +1,11 @@
 <h2>Upcoming Talks</h2>
 <div id="upcoming-talks" class="talk-grid"></div>
+<p id="no-upcoming-talks" class="talk-muted" style="display: none">Nothing is scheduled yet. Let us know if you would like to have a talk.</p>
 
 <h2>Past Talks</h2>
 <div id="past-talks" class="talk-grid"></div>
 
-<div id="all-talks" style="display: none;">
+<div id="all-talks" style="display: none">
   {%- assign sorted = site.data.talks | sort: "date" -%}
   {%- for talk in sorted -%}
     {%- include talk-card.html talk=talk -%}

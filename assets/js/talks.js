@@ -1,5 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", updateTalks);
+
+function updateTalks() {
     const upcoming = document.getElementById("upcoming-talks");
+    const upcomingEmpty = document.getElementById("no-upcoming-talks");
     const past = document.getElementById("past-talks");
     const allTalks = document.getElementById("all-talks");
     
@@ -32,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     if (upcomingTalks.length === 0) {
-        upcoming.innerHTML = '<p class="talk-muted">Nothing scheduled yet.</p>';
+        upcoming.style.display = "none";
+        upcomingEmpty.style.display = "";
+    } else {
+        upcoming.style.display = "";
+        upcomingEmpty.style.display = "none";
     }
-});
+}
