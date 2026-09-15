@@ -3,12 +3,13 @@
 We are a community of students and researchers who share a passion for the theory of learning. This is our website for a biweekly event on the this subject, built with [Jekyll](https://jekyllrb.com/) and the default **minima** theme, hosted on GitHub Pages.
 
 
-## Add a talk
+## Add a talk entry
 
-Edit **`_data/talks.yml`** and add one entry (see the comments at the top of that file for all available fields):
+Edit **`_data/talks.yml`** and add one entry. See the comments at the top of that file for all available fields.
 
 ```yaml
 - date: 2026-08-19                               # required
+  id: jane-doe-2026-aug-19                       # required
   presenter: Jane Doe                            # required
   presenter_url: https://example.com/jane-doe    # optional
   affiliation: Some University                   # optional
@@ -25,6 +26,19 @@ Edit **`_data/talks.yml`** and add one entry (see the comments at the top of tha
 ```
 
 The site sorts by `date` and splits entries into **Upcoming** and **Past** automatically. To host slides in the repository, drop the PDF in `assets/slides/` and point the `slides` field at it. To host a poster, drop the image or PDF in `assets/posters/` and point the `poster` field at it.
+
+
+## Add the talk page
+
+Each talk also gets its own page under `/talks/<id>`. The page shows the presenter, date, session, full abstract, and all material links. `<id>` is the name of the presenter followed by the talk date. Create `_pages/talks/<id>.md`, where the file name must equal the `id` field of the entry you just added. Its content should look like below. Nothing else is needed.
+
+```yaml
+---
+layout: talk
+talk_id: jane-doe-2026-aug-19
+nav_exclude: true
+---
+```
 
 
 ## Run locally

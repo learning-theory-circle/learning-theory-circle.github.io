@@ -73,6 +73,80 @@ font-size: 0.8rem;
    font-weight: bold;
  }
 
+/* Style for a talk page */
+
+.talk-page {
+  max-width: 46rem;
+}
+
+.talk-page-back {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.talk-page-presenter {
+  margin: 0;
+  font-weight: bold;
+}
+
+.talk-page-meta {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.85rem;
+  color: #777;
+  display: flex;
+  gap: 1rem;
+}
+
+.talk-page-session {
+  color: #f364e2;
+  font-weight: bold;
+}
+
+.talk-page-title {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.6em;
+  line-height: 1.25;
+}
+
+.talk-page-authors {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.talk-page h2 {
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.talk-page-abstract {
+  margin: 0;
+  text-align: justify;
+  line-height: 1.6;
+}
+
+.talk-page-links {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.talk-page-links a {
+  font-weight: bold;
+}
+
+.talk-title a {
+  color: black;
+  text-decoration: none;
+}
+
+.talk-title a:hover {
+  color:#058a45;
+  text-decoration: underline;
+}
+
 /* Footer styling */
 
 .site-footer {

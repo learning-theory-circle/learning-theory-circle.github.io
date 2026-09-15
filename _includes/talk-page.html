@@ -1,0 +1,42 @@
+{%- assign talk = include.talk -%}
+
+<article class="talk-page">
+  <p class="talk-page-back"><a href="{{ '/' | relative_url }}">&larr; All Talks</a></p>
+
+  <p class="talk-page-presenter">
+    {%- if talk.presenter_url -%}
+      <a href="{{ talk.presenter_url }}">{{ talk.presenter }}</a>
+    {%- else -%}
+      {{ talk.presenter }}
+    {%- endif -%}
+    {%- if talk.affiliation %} &middot; {{ talk.affiliation }}{%- endif -%}
+  </p>
+
+  <p class="talk-page-meta">
+    <span class="talk-page-date" data-date="{{ talk.date | date: '%Y-%m-%d' }}">{{ talk.date | date: "%b %-d, %Y" }}</span>
+    {%- if talk.session %}<span class="talk-page-session">Session {{ talk.session }}</span>{%- endif -%}
+  </p>
+
+  <h1 class="talk-page-title">{{ talk.title }}</h1>
+
+  {%- if talk.authors -%}
+    <p class="talk-page-authors">By {{ talk.authors }}</p>
+  {%- endif -%}
+
+  {%- if talk.abstract -%}
+    <h2>Abstract</h2>
+    <p class="talk-page-abstract">{{ talk.abstract }}</p>
+  {%- endif -%}
+
+  {%- if talk.paper or talk.book or talk.notes or talk.slides or talk.video or talk.poster -%}
+    <h2>Materials</h2>
+    <ul class="talk-page-links">
+      {%- if talk.paper -%}<li><a href="{{ talk.paper }}">paper</a></li>{%- endif -%}
+      {%- if talk.book -%}<li><a href="{{ talk.book }}">book</a></li>{%- endif -%}
+      {%- if talk.notes -%}<li><a href="{{ talk.notes }}">notes</a></li>{%- endif -%}
+      {%- if talk.slides -%}<li><a href="{{ talk.slides }}">slides</a></li>{%- endif -%}
+      {%- if talk.video -%}<li><a href="{{ talk.video }}">video</a></li>{%- endif -%}
+      {%- if talk.poster -%}<li><a href="{{ talk.poster }}">poster</a></li>{%- endif -%}
+    </ul>
+  {%- endif -%}
+</article>
