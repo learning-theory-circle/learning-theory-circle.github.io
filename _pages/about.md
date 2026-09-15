@@ -11,7 +11,7 @@ We are a group of young scholars passionate about learning theory and enjoy disc
 
 ## Scope
 
-Topics of the talks include, but are not limited to generalization, optimization and training dynamics, approximation and expressivity, learnability, regularization, implicit bias, kernel methods, infinite-width limits, and the theory behind architectures and modern practice.
+Topics of the talks can include any aspect of machine learning theory and its subfields such as deep learning and reinforcement leanring. Some sample topics are generalization, optimization and training dynamics, approximation and expressivity, learnability, regularization, Bayesian methods, kernel methods, implicit bias, infinite-width limits, and the theory behind architectures and modern practice.
 
 
 ## Format
@@ -23,9 +23,7 @@ Topics of the talks include, but are not limited to generalization, optimization
 
 ## Present a Topic
 
-Everyone is welcome to present. There are two steps to sign up.
-- Email us at [{{ site.data.circle.contact_email }}](mailto:{{ site.data.circle.contact_email }}).
-- Open a pull request on [GitHub]({{ site.data.circle.github_url }}), adding an entry to `_data/talks.yml` with a matching page under `_pages/talks/`.
+Everyone is welcome to present. There is only one simple step to sign up. Email us at [{{ site.data.circle.contact_email }}](mailto:{{ site.data.circle.contact_email }}). Alternatively, you may also contact any of the organizers mentioned above.
 
 
 ## Stay in the Loop

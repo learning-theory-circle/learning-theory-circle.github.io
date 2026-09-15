@@ -3,9 +3,9 @@
 We are a community of students and researchers who share a passion for the theory of learning. This is our website for a biweekly event on the this subject, built with [Jekyll](https://jekyllrb.com/) and the default **minima** theme, hosted on GitHub Pages.
 
 
-## Add a talk entry
+## Add a Talk Entry
 
-Edit **`_data/talks.yml`** and add one entry. See the comments at the top of that file for all available fields.
+Edit **`_data/talks.yml`** and add one entry. See the comments at the top of that file for all available fields. Its content should look like below. Note that `id` is the name of the presenter followed by the talk date.
 
 ```yaml
 - date: 2026-08-19                               # required
@@ -22,15 +22,15 @@ Edit **`_data/talks.yml`** and add one entry. See the comments at the top of tha
   poster: /assets/posters/2026-08-19.png         # optional
   slides: /assets/slides/2026-08-19.pdf          # optional
   video: https://youtu.be/XXXXXXX                # optional
-  abstract: "One or two sentences."              # optional
+  abstract: "One or two sentences."              # required
 ```
 
 The site sorts by `date` and splits entries into **Upcoming** and **Past** automatically. To host slides in the repository, drop the PDF in `assets/slides/` and point the `slides` field at it. To host a poster, drop the image or PDF in `assets/posters/` and point the `poster` field at it.
 
 
-## Add the talk page
+## Add the Talk Page
 
-Each talk also gets its own page under `/talks/<id>`. The page shows the presenter, date, session, full abstract, and all material links. `<id>` is the name of the presenter followed by the talk date. Create `_pages/talks/<id>.md`, where the file name must equal the `id` field of the entry you just added. Its content should look like below. Nothing else is needed.
+Each talk also gets its own page. The page shows the presenter, date, session number, full abstract, and all material links. Create `_pages/talks/<talk_id>.md`, where the file name `<talk_id>` must equal the `id` field of the talk entry you just added. The minimal content of this file should look like below. You can add extra information too.
 
 ```yaml
 ---
@@ -41,7 +41,7 @@ nav_exclude: true
 ```
 
 
-## Run locally
+## Run Locally
 
 To run the site locally, you need `ruby` and `bundler`. After running the following commands, open <http://localhost:4000>.
 

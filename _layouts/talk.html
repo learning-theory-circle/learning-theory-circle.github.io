@@ -4,7 +4,7 @@ layout: default
 
 {%- assign talk = site.data.talks | where: "id", page.talk_id | first -%}
 {%- if talk -%}
-  {% include talk-page.html talk=talk %}
+  {% include talk-page.html talk=talk content=content %}
 {%- else -%}
   <p class="talk-muted">Sorry, the details of this talk could not be found.</p>
 {%- endif -%}
