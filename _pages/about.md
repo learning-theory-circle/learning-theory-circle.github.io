@@ -25,7 +25,7 @@ Topics of the talks include, but are not limited to generalization, optimization
 
 Everyone is welcome to present. There are two steps to sign up.
 - Email us at [{{ site.data.circle.contact_email }}](mailto:{{ site.data.circle.contact_email }}).
-- Open a pull request on [GitHub]({{ site.data.circle.github_url }}), adding an entry to `_data/talks.yml` with a matching page under `_pages/talks/`.
+- Open a pull request on [GitHub]({{ site.data.circle.github_url }}), adding an entry to `_data/talks.yml` with a matching page under the folder `_pages/talks` with the name `<talk_id>.md`.
 
 
 ## Stay in the Loop

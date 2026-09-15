@@ -1,8 +1,7 @@
 #  Site Configuration
 
 title: Learning Theory Circle
-description: >-
-  A community of students and researchers who share a passion for the theory of learning
+description: A community of students and researchers who share a passion for the theory of learning
 
 # URL
 baseurl: ""

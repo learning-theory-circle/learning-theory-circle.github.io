@@ -1,4 +1,5 @@
 {%- assign talk = include.talk -%}
+{%- assign content = include.content -%}
 
 <article class="talk-page">
   <p class="talk-page-back"><a href="{{ '/' | relative_url }}">&larr; All Talks</a></p>
@@ -38,5 +39,9 @@
       {%- if talk.video -%}<li><a href="{{ talk.video }}">video</a></li>{%- endif -%}
       {%- if talk.poster -%}<li><a href="{{ talk.poster }}">poster</a></li>{%- endif -%}
     </ul>
+  {%- endif -%}
+
+  {%- if content and content != "" -%}
+    <div class="talk-page-notes">{{ content }}</div>
   {%- endif -%}
 </article>
