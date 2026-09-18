@@ -23,6 +23,16 @@
 #
 # =============================================================
 
+- date: 2026-09-27
+  id: hosein-rahnama-2026-sep-27
+  presenter: Hosein Rahnama
+  presenter_url: https://www.linkedin.com/in/hosein-rahnama
+  title: Convergence Analysis of SGD in Convex Optimization Problems
+  session: "2"
+  book: https://www.di.ens.fr/~fbach/ltfp
+  poster: "/assets/posters/hosein-rahnama-2026-sep-13.png"
+  abstract: "As its name suggests, stochastic gradient descent (SGD) is a stochastic version of the gradient descent algorithm. Gradient descent is a greedy algorithm that locally decreases the value of the objective function by moving in the direction of its negative gradient, with the aim of eventually reaching a local or global minimum. In its stochastic version, the direction of movement is a random vector, which we expect its average to point in the direction of the negative gradient, or more generally, in the direction of the negative of a vector in the subdifferential of the function. Our goal is to provide a precise formulation of this general idea and to study the convergence of the algorithm for convex functions. We begin with Lipschitz convex objective functions and then extend the results to strongly convex functions. Finally, we consider an application of the method to regularized empirical risk minimization problems arising in machine learning."
+
 - date: 2026-09-13
   id: hosein-rahnama-2026-sep-13
   presenter: Hosein Rahnama
@@ -31,6 +41,7 @@
   session: "1"
   book: https://www.di.ens.fr/~fbach/ltfp
   notes: "/assets/notes/hosein-rahnama-2026-sep-13.pdf"
+  video: https://www.youtube.com/watch?v=WOOS3aRTjpA
   poster: "/assets/posters/hosein-rahnama-2026-sep-13.png"
   abstract: "As its name suggests, stochastic gradient descent (SGD) is a stochastic version of the gradient descent algorithm. Gradient descent is a greedy algorithm that locally decreases the value of the objective function by moving in the direction of its negative gradient, with the aim of eventually reaching a local or global minimum. In its stochastic version, the direction of movement is a random vector, which we expect its average to point in the direction of the negative gradient, or more generally, in the direction of the negative of a vector in the subdifferential of the function. Our goal is to provide a precise formulation of this general idea and to study the convergence of the algorithm for convex functions. We begin with Lipschitz convex objective functions and then extend the results to strongly convex functions. Finally, we consider an application of the method to regularized empirical risk minimization problems arising in machine learning."
 
@@ -107,10 +118,10 @@
   title: "PAC-Bayesian Mini-Course"
   session: "4"
   notes: https://arxiv.org/abs/2110.11216
-  poster: "/assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
+  poster: "/assets/posters/erfan-mirzaei-2026-jul-4.png"
   slides: "/assets/slides/erfan-mirzaei-2026-jul-12.pdf"
   video: "https://youtu.be/7uOzUt8m9dU"
-  abstract: "Aggregated predictors are obtained by making a set of basic predictors vote according to some weights, that is, to some probability distribution. Randomized predictors are obtained by sampling in a set of basic predictors, according to some prescribed probability distribution. Thus, aggregated and randomized predictors have in common that they are not defined by a minimization problem, but by a probability distribution on the set of predictors. In statistical learning theory, there is a set of tools designed to understand the generalization ability of such procedures, called PAC-Bayes bounds. In this series of talks, I will try to provide an introduction to the theoretical foundations of this concept."
+  abstract: "This mini-course offers a gentle introduction to PAC-Bayes theory. We begin with classical PAC bounds for a single predictor from a finite set, then extend to PAC-Bayes, which handles infinite hypothesis spaces and randomized predictors via a KL divergence complexity penalty. Through a foundational bound, we illustrate the core ideas and discuss why PAC-Bayes is especially useful for understanding the generalization of averaged and randomized predictors."
 
 - date: 2026-07-11
   id: erfan-mirzaei-2026-jul-11
@@ -120,10 +131,10 @@
   title: "PAC-Bayesian Mini-Course"
   session: "3"
   notes: https://arxiv.org/abs/2110.11216
-  poster: "/assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
+  poster: "/assets/posters/erfan-mirzaei-2026-jul-4.png"
   slides: "/assets/slides/erfan-mirzaei-2026-jul-11.pdf"
   video: "https://youtu.be/jr0MZID1hSQ"
-  abstract: "Aggregated predictors are obtained by making a set of basic predictors vote according to some weights, that is, to some probability distribution. Randomized predictors are obtained by sampling in a set of basic predictors, according to some prescribed probability distribution. Thus, aggregated and randomized predictors have in common that they are not defined by a minimization problem, but by a probability distribution on the set of predictors. In statistical learning theory, there is a set of tools designed to understand the generalization ability of such procedures, called PAC-Bayes bounds. In this series of talks, I will try to provide an introduction to the theoretical foundations of this concept."
+  abstract: "This mini-course offers a gentle introduction to PAC-Bayes theory. We begin with classical PAC bounds for a single predictor from a finite set, then extend to PAC-Bayes, which handles infinite hypothesis spaces and randomized predictors via a KL divergence complexity penalty. Through a foundational bound, we illustrate the core ideas and discuss why PAC-Bayes is especially useful for understanding the generalization of averaged and randomized predictors."
 
 - date: 2026-07-05
   id: erfan-mirzaei-2026-jul-5
@@ -133,10 +144,10 @@
   title: "PAC-Bayesian Mini-Course"
   session: "2"
   notes: https://arxiv.org/abs/2110.11216
-  poster: "/assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
+  poster: "/assets/posters/erfan-mirzaei-2026-jul-4.png"
   slides: "/assets/slides/erfan-mirzaei-2026-jul-5.pdf"
   video: "https://youtu.be/MCkobNxThjE"
-  abstract: "Aggregated predictors are obtained by making a set of basic predictors vote according to some weights, that is, to some probability distribution. Randomized predictors are obtained by sampling in a set of basic predictors, according to some prescribed probability distribution. Thus, aggregated and randomized predictors have in common that they are not defined by a minimization problem, but by a probability distribution on the set of predictors. In statistical learning theory, there is a set of tools designed to understand the generalization ability of such procedures, called PAC-Bayes bounds. In this series of talks, I will try to provide an introduction to the theoretical foundations of this concept."
+  abstract: "This mini-course offers a gentle introduction to PAC-Bayes theory. We begin with classical PAC bounds for a single predictor from a finite set, then extend to PAC-Bayes, which handles infinite hypothesis spaces and randomized predictors via a KL divergence complexity penalty. Through a foundational bound, we illustrate the core ideas and discuss why PAC-Bayes is especially useful for understanding the generalization of averaged and randomized predictors."
 
 - date: 2026-07-04
   id: erfan-mirzaei-2026-jul-4
@@ -146,7 +157,7 @@
   title: "PAC-Bayesian Mini-Course"
   session: "1"
   notes: https://arxiv.org/abs/2110.11216
-  poster: "/assets/posters/erfan-mirzaei-pac-bayesian-mini-course.png"
+  poster: "/assets/posters/erfan-mirzaei-2026-jul-4.png"
   slides: "/assets/slides/erfan-mirzaei-2026-jul-4.pdf"
   video: "https://youtu.be/QDX_adPDq0I"
-  abstract: "Aggregated predictors are obtained by making a set of basic predictors vote according to some weights, that is, to some probability distribution. Randomized predictors are obtained by sampling in a set of basic predictors, according to some prescribed probability distribution. Thus, aggregated and randomized predictors have in common that they are not defined by a minimization problem, but by a probability distribution on the set of predictors. In statistical learning theory, there is a set of tools designed to understand the generalization ability of such procedures, called PAC-Bayes bounds. In this series of talks, I will try to provide an introduction to the theoretical foundations of this concept."
+  abstract: "This mini-course offers a gentle introduction to PAC-Bayes theory. We begin with classical PAC bounds for a single predictor from a finite set, then extend to PAC-Bayes, which handles infinite hypothesis spaces and randomized predictors via a KL divergence complexity penalty. Through a foundational bound, we illustrate the core ideas and discuss why PAC-Bayes is especially useful for understanding the generalization of averaged and randomized predictors."

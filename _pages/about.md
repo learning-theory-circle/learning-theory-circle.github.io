@@ -11,12 +11,12 @@ We are a group of young scholars passionate about learning theory and enjoy disc
 
 ## Scope
 
-Topics of the talks can include any aspect of machine learning theory and its subfields such as deep learning and reinforcement leanring. Some sample topics are generalization, optimization and training dynamics, approximation and expressivity, learnability, regularization, Bayesian methods, kernel methods, implicit bias, infinite-width limits, and the theory behind architectures and modern practice.
+Topics of the talks can include any aspect of machine learning theory and its subfields such as deep learning and reinforcement leanring. Some sample topics are generalization, optimization and training dynamics, approximation and expressivity, learnability, applications of information theory in learning, Bayesian methods, kernel methods, regularization and implicit bias, infinite-width limits, and the theory behind architectures and modern practice.
 
 
 ## Format
 
-- One presenter, one topic, roughly 60 minutes including discussion.
+- One presenter, one topic, around 1-2 hours including discussion.
 - Interactive, questions throughout are encouraged.
 - Slides are optional; walking through the text or the whiteboard is fine.
 
