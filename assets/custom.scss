@@ -73,6 +73,21 @@ font-size: 0.8rem;
    font-weight: bold;
  }
 
+.talk-card-footer {
+  border-top: 1px solid #eee;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.talk-details {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #777;
+}
+
  .talk-title a {
   color: black;
   text-decoration: none;
