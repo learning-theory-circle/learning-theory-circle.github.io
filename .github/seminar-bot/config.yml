@@ -1,0 +1,15 @@
+# Settings for the seminar bot (.github/seminar-bot/bot.py).
+# The bot runs every day and opens GitHub issues that remind the organizer
+# to collect talk data, send the emails, and upload the videos.
+
+organizer: erfunmirzaei         # GitHub user who gets the reminder issues
+organizer_name: Erfan Mirzaei   # name that signs the emails
+
+# Sessions happen every `cadence_days`, starting from `anchor_date`.
+anchor_date: 2026-10-25
+cadence_days: 14
+time_tehran: "19:00"
+time_utc: "15:30"
+
+request_days_before: 14         # ask for the talk data this many days before a session
+video_days_after: 2             # ask for the video this many days after a session

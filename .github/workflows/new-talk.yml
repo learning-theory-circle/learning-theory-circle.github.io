@@ -1,0 +1,82 @@
+# Turns a "New talk" issue into a pull request that adds the talk to the site.
+# Merge the pull request to publish the talk.
+name: New talk
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: new-talk-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  pull-request:
+    # Only organizers (repository members and collaborators) can add talks.
+    if: >-
+      contains(github.event.issue.labels.*.name, 'new-talk') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+      ISSUE_BODY: ${{ github.event.issue.body }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pyyaml
+      - name: Add the talk
+        id: talk
+        run: |
+          printf '%s\n' "$ISSUE_BODY" > "$RUNNER_TEMP/issue.md"
+          if ! python .github/seminar-bot/bot.py add-talk "$RUNNER_TEMP/issue.md" > "$RUNNER_TEMP/out.txt" 2> "$RUNNER_TEMP/err.txt"; then
+            gh issue comment "$ISSUE" --body "The bot could not read this form: $(cat "$RUNNER_TEMP/err.txt"). Edit the issue to fix it."
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/out.txt" >> "$GITHUB_OUTPUT"
+      - name: Write the pull request text
+        env:
+          TALK_ID: ${{ steps.talk.outputs.id }}
+          WARNING: ${{ steps.talk.outputs.warning }}
+        run: |
+          {
+            echo "Adds the talk \`$TALK_ID\` from #$ISSUE."
+            echo
+            if [ -n "$WARNING" ]; then echo "> [!WARNING]"; echo "> $WARNING"; echo; fi
+            echo "**Examine the data and the texts below. Merge this pull request to publish the talk.**"
+            echo "To change something, edit #$ISSUE. The bot then updates this pull request."
+            echo "After the merge, the bot sends you the emails 7 days and 1 day before the session."
+            echo
+            python .github/seminar-bot/bot.py preview "$TALK_ID"
+            echo
+            echo "Closes #$ISSUE"
+          } > "$RUNNER_TEMP/pr.md"
+      - name: Open or update the pull request
+        env:
+          TALK_ID: ${{ steps.talk.outputs.id }}
+        run: |
+          branch="new-talk/issue-$ISSUE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add _data/talks.yml _pages/talks
+          git commit -m "Add talk $TALK_ID"
+          git push --force origin "$branch"
+          if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$branch" --title "Add talk: $TALK_ID" --body-file "$RUNNER_TEMP/pr.md"
+            gh issue comment "$ISSUE" --body "The pull request is updated: $(gh pr view "$branch" --json url --jq .url)"
+          else
+            url=$(gh pr create --base main --head "$branch" --title "Add talk: $TALK_ID" \
+              --body-file "$RUNNER_TEMP/pr.md" --assignee "${{ github.event.issue.user.login }}")
+            gh issue comment "$ISSUE" --body "The pull request is ready: $url"
+          fi

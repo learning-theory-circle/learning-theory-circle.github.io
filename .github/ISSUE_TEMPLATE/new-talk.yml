@@ -1,0 +1,79 @@
+name: New talk
+description: Give the data of a talk. The seminar bot makes a pull request from it.
+title: "New talk: "
+labels: ["new-talk"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in this form. The bot adds the talk to `_data/talks.yml`, makes its page, and opens a pull request with previews of the emails and the Telegram text.
+        To change the data later, edit this issue. The bot updates the pull request.
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: The session date, YYYY-MM-DD.
+      placeholder: "2026-11-08"
+    validations:
+      required: true
+  - type: input
+    id: presenter
+    attributes:
+      label: Presenter
+    validations:
+      required: true
+  - type: input
+    id: presenter_url
+    attributes:
+      label: Presenter webpage
+  - type: input
+    id: affiliation
+    attributes:
+      label: Affiliation
+  - type: input
+    id: title
+    attributes:
+      label: Title
+    validations:
+      required: true
+  - type: input
+    id: session
+    attributes:
+      label: Session
+      description: The session number, if the talk is part of a series.
+  - type: input
+    id: paper
+    attributes:
+      label: Paper
+      description: URL of the paper (arXiv, OpenReview, ...).
+  - type: input
+    id: book
+    attributes:
+      label: Book
+      description: URL of the book.
+  - type: input
+    id: notes
+    attributes:
+      label: Notes
+      description: URL, or a local path like /assets/notes/jane-doe-2026-nov-08.pdf
+  - type: input
+    id: slides
+    attributes:
+      label: Slides
+      description: URL, or a local path like /assets/slides/jane-doe-2026-nov-08.pdf
+  - type: input
+    id: poster
+    attributes:
+      label: Poster
+      description: URL, or a local path like /assets/posters/jane-doe-2026-nov-08.png
+  - type: textarea
+    id: abstract
+    attributes:
+      label: Abstract
+    validations:
+      required: true
+  - type: textarea
+    id: side_notes
+    attributes:
+      label: Side notes
+      description: Optional. Extra text for the talk page.

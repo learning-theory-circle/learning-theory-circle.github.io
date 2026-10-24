@@ -1,0 +1,23 @@
+Subject: Next session: $title ($presenter), $date_short, $time_tehran Tehran
+
+Dear all,
+
+We are happy to announce the next session of the Learning Theory Circle.
+
+Title: $title$session_suffix
+Presenter: $presenter_line
+Date: $date_long
+Time: $time_tehran Tehran time ($time_utc UTC)
+Join: $meet_url
+
+Abstract:
+$abstract
+
+$resources
+Calendar: $calendar_url
+Past talks on YouTube: $youtube_url
+
+We look forward to seeing you there!
+
+Best regards,
+$organizer_name, on behalf of the Learning Theory Circle organizers

@@ -1,0 +1,47 @@
+# Opens reminder issues for the organizer: talk data, emails, and videos.
+# See .github/seminar-bot/config.yml for the settings.
+name: Seminar bot
+
+on:
+  schedule:
+    - cron: "30 5 * * *"  # every day at 09:00 Tehran time
+  workflow_dispatch:
+    inputs:
+      today:
+        description: "Pretend today is this date (YYYY-MM-DD). Leave empty for the real date."
+        required: false
+      dry_run:
+        description: "Dry run: print the actions but open no issues"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: seminar-bot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pyyaml
+      - name: Run the bot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TODAY: ${{ inputs.today }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          args=()
+          if [ -n "$TODAY" ]; then args+=(--today "$TODAY"); fi
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          python .github/seminar-bot/bot.py run "${args[@]}"
