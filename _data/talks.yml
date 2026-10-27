@@ -23,6 +23,14 @@
 #
 # =============================================================
 
+- date: 2026-11-08
+  id: amirabbas-asadi-2026-nov-08
+  presenter: "Amirabbas Asadi"
+  presenter_url: "https://amirabbasasadi.github.io/"
+  title: "An Introduction to Stein's Method for Machine Learning: Foundations, Applications, and Geometry"
+  session: "2"
+  abstract: "This mini-course introduces Stein's method, connecting its foundations in probability with modern methods for sampling and inference. We will begin with Charles Stein's original paper on normal approximation, then explore Barbour's generator approach to deriving Stein operators for other distributions. Along the way, we will discuss theoretical applications, including derivation or improvement of concentration inequalities and mention other interesting results like the Fourth Moment Theorem. In the second part, we will use the Langevin Stein operator to derive Stein variational gradient descent (SVGD), a nonparametric approach to variational inference that can also be viewed as a deterministic sampling method. Finally, we will interpret SVGD through the framework of gradient flows, revealing the geometric structure behind its particle dynamics."
+
 - date: 2026-10-25
   id: amirabbas-asadi-2026-oct-25
   presenter: Amirabbas Asadi
