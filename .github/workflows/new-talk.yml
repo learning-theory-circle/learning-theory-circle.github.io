@@ -17,16 +17,25 @@ concurrency:
 
 jobs:
   pull-request:
-    # Only organizers (repository members and collaborators) can add talks.
-    if: >-
-      contains(github.event.issue.labels.*.name, 'new-talk') &&
-      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association)
+    if: contains(github.event.issue.labels.*.name, 'new-talk')
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
       ISSUE: ${{ github.event.issue.number }}
       ISSUE_BODY: ${{ github.event.issue.body }}
     steps:
+      # Only organizers (users with write access) can add talks. The issue's
+      # author_association is not used: it hides private organization members.
+      - name: Check the author
+        env:
+          AUTHOR: ${{ github.event.issue.user.login }}
+        run: |
+          permission=$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$AUTHOR/permission" --jq .permission)
+          echo "$AUTHOR has $permission access."
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "::error::Only organizers with write access can add talks."; exit 1 ;;
+          esac
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Python
