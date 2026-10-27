@@ -356,9 +356,9 @@ def cmd_run(args):
             f"2. Add `video: \"<YouTube link>\"` to the talk `{previous['id']}` in `_data/talks.yml`.\n"
             f"3. If there are slides or notes, add them too.\n\n"
             f"This issue closes automatically when the video link is in `_data/talks.yml`."))
-        if days_left <= 3:
+        if today >= previous["date"] + dt.timedelta(days=cfg["video_reminder_days_after"]):
             bot.comment_once(key, f"{key}:reminder",
-                             f"The next session is in {days_left} days and this video is still missing.")
+                             f"Reminder: the video is still missing. The next session is in {days_left} days.")
 
 
 def cmd_preview(args):

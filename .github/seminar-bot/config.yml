@@ -12,4 +12,5 @@ time_tehran: "19:00"
 time_utc: "15:30"
 
 request_days_before: 14         # ask for the talk data this many days before a session
-video_days_after: 2             # ask for the video this many days after a session
+video_days_after: 6             # ask for the video this many days after a session (Saturday)
+video_reminder_days_after: 7    # remind about the video this many days after a session (Sunday)
