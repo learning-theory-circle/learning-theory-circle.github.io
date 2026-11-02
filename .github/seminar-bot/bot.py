@@ -150,6 +150,8 @@ def template_values(talk, cfg, circle, site_url):
         "date_long": talk["date"].strftime("%A, %-d %B %Y"),
         "date_short": talk["date"].strftime("%a %-d %b"),
         "date_fa": date_fa(talk["date"]),
+        "date_youtube": talk["date"].strftime("%A, %b %-d"),
+        "time_12h": dt.datetime.strptime(cfg["time_tehran"], "%H:%M").strftime("%-I:%M %p"),
         "time_tehran": cfg["time_tehran"],
         "time_utc": cfg["time_utc"],
         "time_fa": cfg["time_tehran"].translate(FA_DIGITS),
@@ -349,13 +351,15 @@ def cmd_run(args):
     if previous and not previous.get("video") and \
             today >= previous["date"] + dt.timedelta(days=cfg["video_days_after"]):
         key = f"video:{previous['id']}"
+        description = render("youtube-description", template_values(previous, cfg, circle, site_url))
         bot.open_issue(key, f"Upload the video of {previous['date']:%a %-d %b}", (
             f"@{cfg['organizer']}, the talk **{previous['title']}** by {previous['presenter']} "
             f"on {previous['date']:%-d %B} has no video on the website.\n\n"
-            f"1. Upload the recording to the [YouTube playlist]({circle['youtube_playlist_url']}).\n"
-            f"2. Add `video: \"<YouTube link>\"` to the talk `{previous['id']}` in `_data/talks.yml`.\n"
-            f"3. If there are slides or notes, add them too.\n\n"
-            f"This issue closes automatically when the video link is in `_data/talks.yml`."))
+            f"1. Upload the recording to the [YouTube playlist]({circle['youtube_playlist_url']}) "
+            f"with the description below.\n"
+            f"2. Reply to this email, or comment on this issue, with the YouTube link.\n"
+            f"3. The bot adds the link to the website and closes this issue.\n\n"
+            f"### YouTube description\n\n```text\n{description}\n```"))
         if today >= previous["date"] + dt.timedelta(days=cfg["video_reminder_days_after"]):
             bot.comment_once(key, f"{key}:reminder",
                              f"Reminder: the video is still missing. The next session is in {days_left} days.")
@@ -433,6 +437,31 @@ def cmd_add_talk(args):
     print(f"id={talk['id']}")
 
 
+def cmd_add_video(args):
+    """Find a YouTube link in a comment and add it to the talk in talks.yml."""
+    text = Path(args.comment).read_text(encoding="utf-8")
+    match = re.search(r"(?:youtube\.com/(?:watch\?(?:\S*&)?v=|live/|shorts/)|youtu\.be/)([\w-]{11})", text)
+    if not match:
+        sys.exit("I found no YouTube video link in your comment.")
+    url = f"https://www.youtube.com/watch?v={match.group(1)}"
+
+    lines = TALKS_FILE.read_text(encoding="utf-8").splitlines(keepends=True)
+    start = next((i for i, line in enumerate(lines)
+                  if re.match(rf"\s*id: \"?{re.escape(args.talk_id)}\"?\s*$", line)), None)
+    if start is None:
+        sys.exit(f"No talk with id {args.talk_id}")
+    end = next((i for i in range(start, len(lines)) if lines[i].startswith("- ")), len(lines))
+    block = range(start, end)
+    video = next((i for i in block if lines[i].startswith("  video:")), None)
+    abstract = next((i for i in block if lines[i].startswith("  abstract:")), start + 1)
+    if video is not None:
+        lines[video] = f'  video: "{url}"\n'
+    else:
+        lines.insert(abstract, f'  video: "{url}"\n')
+    TALKS_FILE.write_text("".join(lines), encoding="utf-8")
+    print(f"url={url}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -446,6 +475,10 @@ def main():
     add = sub.add_parser("add-talk")
     add.add_argument("issue_body", help="file with the body of a New talk issue")
     add.set_defaults(func=cmd_add_talk)
+    video = sub.add_parser("add-video")
+    video.add_argument("talk_id")
+    video.add_argument("comment", help="file with the text that has the YouTube link")
+    video.set_defaults(func=cmd_add_video)
     args = parser.parse_args()
     args.func(args)
 

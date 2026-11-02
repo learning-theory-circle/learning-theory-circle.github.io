@@ -1,0 +1,13 @@
+We're holding a biweekly reading group on the theory of deep learning. Every other Sunday, one person presents a paper followed by an open discussion.
+
+🗓 $date_youtube · $time_12h (Tehran, UTC+3:30)
+
+🎤 $presenter
+
+📄 "$title$session_suffix"
+
+🔗 Schedule, links & past talks: learning-theory-circle.github.io
+
+Want to present a future session? Get in touch or open a PR on the webpage. See you Sunday!
+آدرس کانال تلگرام: t.me/SingularThinker
+#education #information_theory #mathematics #math #ai #learning_theory #machinelearning #ml

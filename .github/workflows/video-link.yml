@@ -1,0 +1,82 @@
+# Opens a pull request that adds a YouTube link to the website when the
+# organizer replies to an "Upload the video" issue (by comment or by email
+# reply) with the link. Merge the pull request to publish the video.
+name: Video link
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: video-link
+  cancel-in-progress: false
+
+jobs:
+  add-video:
+    if: >-
+      !github.event.issue.pull_request &&
+      contains(github.event.issue.labels.*.name, 'seminar-bot') &&
+      contains(github.event.issue.body, '<!-- seminar-bot:video:') &&
+      github.event.comment.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+      ISSUE_BODY: ${{ github.event.issue.body }}
+      COMMENT: ${{ github.event.comment.body }}
+    steps:
+      - name: Check the author
+        env:
+          AUTHOR: ${{ github.event.comment.user.login }}
+        run: |
+          permission=$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$AUTHOR/permission" --jq .permission)
+          echo "$AUTHOR has $permission access."
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "::error::Only organizers with write access can add videos."; exit 1 ;;
+          esac
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pyyaml
+      - name: Add the video link
+        id: video
+        run: |
+          talk_id=$(printf '%s' "$ISSUE_BODY" | sed -n 's/.*<!-- seminar-bot:video:\([^ ]*\) -->.*/\1/p')
+          echo "talk_id=$talk_id" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$COMMENT" > "$RUNNER_TEMP/comment.md"
+          if ! python .github/seminar-bot/bot.py add-video "$talk_id" "$RUNNER_TEMP/comment.md" > "$RUNNER_TEMP/out.txt" 2> "$RUNNER_TEMP/err.txt"; then
+            gh issue comment "$ISSUE" --body "$(cat "$RUNNER_TEMP/err.txt") Reply again with the link, for example https://youtu.be/XXXXXXXXXXX"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/out.txt" >> "$GITHUB_OUTPUT"
+      - name: Open or update the pull request
+        env:
+          TALK_ID: ${{ steps.video.outputs.talk_id }}
+          URL: ${{ steps.video.outputs.url }}
+        run: |
+          branch="video/issue-$ISSUE"
+          printf 'Adds the video %s to the talk `%s`.\n\nOpen the link to check it is the correct video, then merge this pull request to publish it.\n\nCloses #%s\n' \
+            "$URL" "$TALK_ID" "$ISSUE" > "$RUNNER_TEMP/pr.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git commit -am "Add video link for $TALK_ID"
+          git push --force origin "$branch"
+          if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$branch" --body-file "$RUNNER_TEMP/pr.md"
+            gh issue comment "$ISSUE" --body "The pull request now has $URL: $(gh pr view "$branch" --json url --jq .url)"
+          else
+            url=$(gh pr create --base main --head "$branch" --title "Add video: $TALK_ID" \
+              --body-file "$RUNNER_TEMP/pr.md" --assignee "${{ github.event.comment.user.login }}")
+            gh issue comment "$ISSUE" --body "The pull request is ready: $url"
+          fi

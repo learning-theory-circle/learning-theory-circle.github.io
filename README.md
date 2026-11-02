@@ -48,7 +48,7 @@ A GitHub Actions job (`.github/workflows/seminar-bot.yml`) runs every day at 09:
 - 14 days before a session with no talk: asks for the talk data, with reminders on days 11, 9, and 7.
 - 7 days before: the announcement email and the Telegram text.
 - 1 day before: the reminder email and the Telegram text.
-- The Saturday after a session with no `video` (6 days after): asks for the video, with a reminder on Sunday (7 days after).
+- The Saturday after a session with no `video` (6 days after): asks for the video and gives the YouTube description, with a reminder on Sunday (7 days after). Reply to the issue (or its email) with the YouTube link, and `video-link.yml` opens a pull request that adds it to `_data/talks.yml`. Merging it publishes the video and closes the issue.
 
 Issues close automatically when the data appears in `_data/talks.yml`. To add a talk, use the **New talk** issue form. The `new-talk.yml` workflow turns it into a pull request with previews of all texts; merge it to publish. The text templates are in `.github/seminar-bot/templates/`. To test the bot, run the workflow by hand from the Actions tab with **dry run** on, or locally:
 
