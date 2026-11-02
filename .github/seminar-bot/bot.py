@@ -159,6 +159,9 @@ def template_values(talk, cfg, circle, site_url):
         "calendar_url": circle["google_calendar_url"],
         "youtube_url": circle["youtube_playlist_url"],
         "talk_url": talk_url(talk, site_url),
+        "site_url": site_url,
+        "mailing_list_url": circle["mailing_list_url"],
+        "contact_email": circle["contact_email"],
         "resources": "\n".join(f"{name}: {url}" for name, url in resources),
         "organizer_name": cfg["organizer_name"],
     }
