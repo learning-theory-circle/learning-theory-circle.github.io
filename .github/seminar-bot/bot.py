@@ -10,12 +10,17 @@ email itself: it puts the texts in issues that are assigned to the organizer.
 """
 
 import argparse
+import base64
 import datetime as dt
+import html
 import json
 import os
 import re
+import shutil
 import string
+import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -28,6 +33,15 @@ BOT_DIR = Path(__file__).resolve().parent
 ROOT = BOT_DIR.parents[1]
 TALKS_FILE = ROOT / "_data" / "talks.yml"
 PAGES_DIR = ROOT / "_pages" / "talks"
+
+GRAPHICS_BRANCH = "graphics"
+GRAPHICS = {  # format: (width, height, use)
+    "youtube": (1280, 720, "YouTube thumbnail"),
+    "portrait": (1080, 1350, "Telegram and LinkedIn"),
+    "x": (1600, 900, "X"),
+}
+CHROME_NAMES = ["google-chrome", "google-chrome-stable", "chromium", "chromium-browser",
+                "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
 
 BOT_LABEL = "seminar-bot"
 NEW_TALK_LABEL = "new-talk"
@@ -178,6 +192,48 @@ def email_parts(name, values):
     return first.removeprefix("Subject:").strip(), body.strip()
 
 
+def graphic_html(talk, fmt, cfg, site_url):
+    main, _, sub = talk["title"].partition(": ")
+    session = str(talk.get("session") or "")
+    date = talk["date"]
+    time_12h = dt.datetime.strptime(cfg["time_tehran"], "%H:%M").strftime("%-I:%M %p")
+    site = site_url.removeprefix("https://")
+    values = {
+        "eyebrow": f"Biweekly sessions · Session {session}" if session else "Biweekly sessions",
+        "when_short": f"{date:%b %-d, %Y}" if fmt == "youtube" else f"{date:%a, %b %-d} · {time_12h} Tehran",
+        "when_long": f"{date:%A, %b %-d} · {time_12h} Tehran",
+        "when_note": f"{cfg['time_utc']} UTC · Online",
+        "aside": f"{cfg['time_utc']} UTC · {site}",
+        "title_main": main,
+        "title_sub": sub,
+        "presenter": talk["presenter"],
+        "abstract": " ".join(str(talk.get("abstract", "")).split()),
+        "site": site,
+    }
+    values = {key: html.escape(value) for key, value in values.items()}
+    values["format"] = fmt
+    logo = (ROOT / "assets" / "logo" / "logo-with-name.svg").read_bytes()
+    values["logo"] = "data:image/svg+xml;base64," + base64.b64encode(logo).decode()
+    text = (BOT_DIR / "templates" / "graphics.html").read_text(encoding="utf-8")
+    return string.Template(text).substitute(values)
+
+
+def make_graphic(talk, fmt, out, cfg, site_url):
+    """Render the `fmt` graphic of `talk` (see GRAPHICS) to the PNG file `out`."""
+    chrome = next((shutil.which(n) for n in [os.environ.get("CHROME"), *CHROME_NAMES]
+                   if n and shutil.which(n)), None)
+    if chrome is None:
+        raise RuntimeError("Chrome is not installed")
+    width, height, _ = GRAPHICS[fmt]
+    with tempfile.TemporaryDirectory() as tmp:
+        page = Path(tmp) / "graphic.html"
+        page.write_text(graphic_html(talk, fmt, cfg, site_url), encoding="utf-8")
+        subprocess.run([chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars",
+                        "--force-device-scale-factor=1", f"--window-size={width},{height}",
+                        "--virtual-time-budget=15000", f"--screenshot={Path(out).resolve()}",
+                        page.as_uri()], check=True, capture_output=True, timeout=120)
+
+
 def texts_markdown(kind, talk, cfg, circle, site_url):
     """Markdown with the email and Telegram text for `kind` ("7day" or "1day")."""
     values = template_values(talk, cfg, circle, site_url)
@@ -233,6 +289,27 @@ class GitHub:
         comments = self.request("GET", f"/issues/{number}/comments?per_page=100")
         return set(re.findall(r"<!-- seminar-bot:(\S+) -->", " ".join(c["body"] for c in comments)))
 
+    def put_file(self, branch, path, data, message):
+        """Commit one file to `branch` and return its raw URL. Makes the branch if it does not exist."""
+        try:
+            parent = self.request("GET", f"/git/ref/heads/{branch}")["object"]["sha"]
+        except urllib.error.HTTPError as e:
+            if e.code != 404:
+                raise
+            parent = None
+        tree = {"tree": [{"path": path, "mode": "100644", "type": "blob", "sha": self.request(
+            "POST", "/git/blobs", {"content": base64.b64encode(data).decode(), "encoding": "base64"})["sha"]}]}
+        if parent:
+            tree["base_tree"] = self.request("GET", f"/git/commits/{parent}")["tree"]["sha"]
+        commit = self.request("POST", "/git/commits", {
+            "message": message, "tree": self.request("POST", "/git/trees", tree)["sha"],
+            "parents": [parent] if parent else []})["sha"]
+        if parent:
+            self.request("PATCH", f"/git/refs/heads/{branch}", {"sha": commit})
+        else:
+            self.request("POST", "/git/refs", {"ref": f"refs/heads/{branch}", "sha": commit})
+        return f"https://raw.githubusercontent.com/{self.repo}/{branch}/{path}"
+
     def ensure_labels(self):
         for name, color in [(BOT_LABEL, "5319e7"), (NEW_TALK_LABEL, "0e8a16")]:
             try:
@@ -275,6 +352,29 @@ class Bot:
         print(f"Close #{issue['number']}: {reason}")
         self.gh.request("POST", f"/issues/{issue['number']}/comments", {"body": reason})
         self.gh.request("PATCH", f"/issues/{issue['number']}", {"state": "closed"})
+
+
+def graphics_markdown(gh, heading, talk, formats, cfg, site_url):
+    """Make the graphics of `talk`, put them on the graphics branch, and return Markdown that shows them."""
+    parts = []
+    with tempfile.TemporaryDirectory() as tmp:
+        for fmt in formats:
+            width, height, use = GRAPHICS[fmt]
+            png = Path(tmp) / f"{talk['id']}-{fmt}.png"
+            try:
+                make_graphic(talk, fmt, png, cfg, site_url)
+                if gh.dry_run:
+                    url = Path(tempfile.gettempdir()) / png.name
+                    shutil.copy(png, url)
+                    print(f"[dry run] {use} saved to {url}")
+                else:
+                    url = gh.put_file(GRAPHICS_BRANCH, png.name, png.read_bytes(),
+                                      f"Add {fmt} graphic for {talk['id']}")
+            except (RuntimeError, subprocess.SubprocessError, urllib.error.URLError) as e:
+                print(f"warning: no {fmt} graphic for {talk['id']}: {e}")
+                continue
+            parts.append(f"**{use}** ({width}×{height}, [download]({url}))\n\n[![{use}]({url})]({url})")
+    return f"### {heading}\n\n" + "\n\n".join(parts) if parts else ""
 
 
 # ---------------------------------------------------------------- commands
@@ -332,13 +432,16 @@ def cmd_run(args):
 
     # 2. Announcement email, 7 days before.
     if talk and 1 < days_left <= 7:
-        bot.open_issue(f"email-7day:{session}",
-                       f"Send the announcement email for {session:%a %-d %b}", (
+        key = f"email-7day:{session}"
+        posters = (graphics_markdown(gh, "Posters", talk, ["portrait", "x"], cfg, site_url)
+                   if key not in bot.issues else "")
+        bot.open_issue(key, f"Send the announcement email for {session:%a %-d %b}", (
             f"@{cfg['organizer']}, it is time to announce the next session.\n\n"
             f"1. Send the email below to the Google Group.\n"
-            f"2. Polish the Telegram text and post it on the channel.\n"
-            f"3. Close this issue.\n\n"
-            + texts_markdown("7day", talk, cfg, circle, site_url)))
+            f"2. Polish the Telegram text and post it on the channel with the poster.\n"
+            f"3. Post the posters on LinkedIn and X.\n"
+            f"4. Close this issue.\n\n"
+            + texts_markdown("7day", talk, cfg, circle, site_url) + f"\n{posters}"))
 
     # 3. Reminder email, 1 day before.
     if talk and days_left == 1:
@@ -355,14 +458,16 @@ def cmd_run(args):
             today >= previous["date"] + dt.timedelta(days=cfg["video_days_after"]):
         key = f"video:{previous['id']}"
         description = render("youtube-description", template_values(previous, cfg, circle, site_url))
+        thumbnail = (graphics_markdown(gh, "Thumbnail", previous, ["youtube"], cfg, site_url)
+                     if key not in bot.issues else "")
         bot.open_issue(key, f"Upload the video of {previous['date']:%a %-d %b}", (
             f"@{cfg['organizer']}, the talk **{previous['title']}** by {previous['presenter']} "
             f"on {previous['date']:%-d %B} has no video on the website.\n\n"
             f"1. Upload the recording to the [YouTube playlist]({circle['youtube_playlist_url']}) "
-            f"with the description below.\n"
+            f"with the description and the thumbnail below.\n"
             f"2. Reply to this email, or comment on this issue, with the YouTube link.\n"
-            f"3. The bot adds the link to the website and closes this issue.\n\n"
-            f"### YouTube description\n\n```text\n{description}\n```"))
+            f"3. The bot opens a pull request that adds the link to the website. Merge it.\n\n"
+            f"### YouTube description\n\n```text\n{description}\n```\n\n{thumbnail}"))
         if today >= previous["date"] + dt.timedelta(days=cfg["video_reminder_days_after"]):
             bot.comment_once(key, f"{key}:reminder",
                              f"Reminder: the video is still missing. The next session is in {days_left} days.")
@@ -440,6 +545,17 @@ def cmd_add_talk(args):
     print(f"id={talk['id']}")
 
 
+def cmd_graphics(args):
+    talk = next((t for t in load_talks() if t["id"] == args.talk_id), None)
+    if talk is None:
+        sys.exit(f"No talk with id {args.talk_id}")
+    cfg, site_url = load_config(), load_yaml(ROOT / "_config.yml")["url"]
+    for fmt in args.formats:
+        out = Path(args.out_dir) / f"{talk['id']}-{fmt}.png"
+        make_graphic(talk, fmt, out, cfg, site_url)
+        print(f"Saved {out} ({GRAPHICS[fmt][2]})")
+
+
 def cmd_add_video(args):
     """Find a YouTube link in a comment and add it to the talk in talks.yml."""
     text = Path(args.comment).read_text(encoding="utf-8")
@@ -478,6 +594,11 @@ def main():
     add = sub.add_parser("add-talk")
     add.add_argument("issue_body", help="file with the body of a New talk issue")
     add.set_defaults(func=cmd_add_talk)
+    for name, formats in [("thumbnail", ["youtube"]), ("posters", ["portrait", "x"])]:
+        graphics = sub.add_parser(name)
+        graphics.add_argument("talk_id")
+        graphics.add_argument("--out-dir", default=".", help="folder for the PNG files (default: here)")
+        graphics.set_defaults(func=cmd_graphics, formats=formats)
     video = sub.add_parser("add-video")
     video.add_argument("talk_id")
     video.add_argument("comment", help="file with the text that has the YouTube link")

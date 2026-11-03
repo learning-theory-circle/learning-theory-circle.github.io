@@ -46,15 +46,17 @@ nav_exclude: true
 A GitHub Actions job (`.github/workflows/seminar-bot.yml`) runs every day at 09:00 Tehran time. It reads `_data/talks.yml` and opens issues for the organizer set in `.github/seminar-bot/config.yml`:
 
 - 14 days before a session with no talk: asks for the talk data, with reminders on days 11, 9, and 7.
-- 7 days before: the announcement email and the Telegram text.
+- 7 days before: the announcement email, the Telegram text, and posters for Telegram and LinkedIn (1080×1350) and X (1600×900).
 - 1 day before: the reminder email and the Telegram text.
-- The Saturday after a session with no `video` (6 days after): asks for the video and gives the YouTube description, with a reminder on Sunday (7 days after). Reply to the issue (or its email) with the YouTube link, and `video-link.yml` opens a pull request that adds it to `_data/talks.yml`. Merging it publishes the video and closes the issue.
+- The Saturday after a session with no `video` (6 days after): asks for the video and gives the YouTube description and thumbnail, with a reminder on Sunday (7 days after). Reply to the issue (or its email) with the YouTube link, and `video-link.yml` opens a pull request that adds it to `_data/talks.yml`. Merging it publishes the video and closes the issue.
 
-Issues close automatically when the data appears in `_data/talks.yml`. To add a talk, use the **New talk** issue form. The `new-talk.yml` workflow turns it into a pull request with previews of all texts; merge it to publish. The text templates are in `.github/seminar-bot/templates/`. To test the bot, run the workflow by hand from the Actions tab with **dry run** on, or locally:
+Issues close automatically when the data appears in `_data/talks.yml`. To add a talk, use the **New talk** issue form. The `new-talk.yml` workflow turns it into a pull request with previews of all texts; merge it to publish. The text templates and the design of all images (`graphics.html`) are in `.github/seminar-bot/templates/`; the images are saved on the `graphics` branch. To test the bot, run the workflow by hand from the Actions tab with **dry run** on, or locally:
 
 ```bash
 python3 .github/seminar-bot/bot.py run --dry-run --today 2026-11-01
 python3 .github/seminar-bot/bot.py preview <talk_id>
+python3 .github/seminar-bot/bot.py thumbnail <talk_id>   # YouTube thumbnail, needs Google Chrome
+python3 .github/seminar-bot/bot.py posters <talk_id>     # Telegram/LinkedIn and X posters
 ```
 
 

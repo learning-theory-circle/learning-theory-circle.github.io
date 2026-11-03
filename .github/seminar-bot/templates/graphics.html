@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Talk graphics in three formats, set by the body class:
+       youtube   1280x720   video thumbnail
+       x         1600x900   post on X (the youtube layout, drawn larger, with the time and the website)
+       portrait  1080x1350  poster for Telegram and LinkedIn
+     bot.py fills in the fields that start with a dollar sign and takes a screenshot with Chrome. -->
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+  :root { --green: #44b768; --ink: #000; --muted: #4a4a4a; --telegram: #2aabee; }
+  * { box-sizing: border-box; margin: 0; }
+  html { overflow: hidden; background: #fff; }
+  body {
+    width: 1280px; height: 720px; overflow: hidden; background: #fff;
+    font-family: "Kanit", sans-serif; color: var(--ink);
+    padding: 44px 64px 40px; display: flex; flex-direction: column; position: relative;
+  }
+  body.x { zoom: 1.25; }
+  body.portrait { width: 1080px; height: 1350px; padding: 64px 72px 60px; }
+  body:not(.x) .x-only, body:not(.portrait) .portrait-only, body.portrait .landscape-only { display: none !important; }
+
+  .head { height: 132px; display: flex; align-items: center; flex: none; }
+  .logo { height: 100%; }
+  .motif { position: absolute; top: 44px; right: 0; width: 480px; height: 132px; }
+  body.portrait .head { height: 140px; }
+  body.portrait .motif { top: 64px; width: 509px; height: 140px; }
+
+  .eyebrow {
+    margin-top: 30px; flex: none; color: var(--green); display: flex; justify-content: space-between; gap: 24px;
+    font-weight: 700; font-size: 30px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
+  }
+  .eyebrow .when { color: var(--muted); font-weight: 600; }
+  body.portrait .eyebrow { margin-top: 48px; font-size: 32px; }
+
+  .title-box { flex: 1 1 auto; min-height: 0; margin-top: 6px; overflow: hidden; }
+  .title { font-weight: 800; text-transform: uppercase; line-height: 1.02; letter-spacing: .005em; }
+  body.portrait .title-box { flex: none; max-height: 280px; margin-top: 10px; }
+  .subtitle { flex: none; margin-top: 8px; font-weight: 500; font-size: 36px; line-height: 1.15; color: var(--muted); }
+  .subtitle:empty { display: none; }
+  body.portrait .subtitle { font-size: 38px; margin-top: 12px; }
+
+  .rule { flex: none; margin-top: 22px; height: 14px; display: flex; align-items: center; gap: 12px; }
+  .rule i { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--green); }
+  .rule b { height: 5px; background: var(--green); }
+  .rule b.short { flex: none; width: 150px; }
+  .rule b.long { flex: 1; }
+  body.portrait .rule { margin-top: 30px; }
+
+  /* The bottom-right corner of the youtube format stays empty: YouTube shows the video length there. */
+  .presenter-row { flex: none; margin-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+  .presenter { flex: 0 1 auto; min-width: 0; color: var(--green); font-weight: 700; font-size: 46px;
+    line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.youtube .presenter { max-width: 960px; }
+  body.portrait .presenter-row { margin-top: 26px; }
+  body.portrait .presenter { font-size: 52px; }
+  .aside { flex: none; color: var(--muted); font-weight: 500; font-size: 26px; white-space: nowrap; }
+
+  .abstract-box { flex: 1 1 auto; min-height: 0; margin-top: 24px; overflow: hidden; }
+  .abstract { font-weight: 400; line-height: 1.42; color: #1a1a1a;
+    display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+
+  .when-row { flex: none; margin-top: 30px; display: flex; align-items: center; gap: 22px; }
+  .chip { background: var(--green); color: #fff; font-weight: 600; font-size: 32px; line-height: 1;
+    padding: 16px 22px; border-radius: 10px; white-space: nowrap; }
+  .note { color: var(--muted); font-weight: 500; font-size: 28px; white-space: nowrap; }
+  .site-label { flex: none; margin-top: 30px; font-weight: 400; font-size: 30px; }
+  .site { flex: none; color: var(--green); font-weight: 700; font-size: 50px; line-height: 1.1;
+    text-transform: uppercase; white-space: nowrap; overflow: hidden; }
+  .telegram { flex: none; margin-top: 14px; display: flex; align-items: center; gap: 12px;
+    color: var(--telegram); font-weight: 500; font-size: 32px; }
+</style>
+</head>
+<body class="$format">
+  <div class="head"><img class="logo" src="$logo" alt=""></div>
+  <svg class="motif" viewBox="0 0 480 132" aria-hidden="true"></svg>
+  <div class="eyebrow"><span>$eyebrow</span><span class="when landscape-only">$when_short</span></div>
+  <div class="title-box"><div class="title">$title_main</div></div>
+  <div class="subtitle">$title_sub</div>
+  <div class="rule landscape-only"><i></i><b class="short"></b><i></i><b class="long"></b></div>
+  <div class="presenter-row"><div class="presenter">$presenter</div><div class="aside x-only">$aside</div></div>
+  <div class="rule portrait-only"><i></i><b class="short"></b><i></i><b class="long"></b></div>
+  <div class="abstract-box portrait-only"><div class="abstract">$abstract</div></div>
+  <div class="rule portrait-only"><b class="long"></b><i></i><b class="short"></b><i></i></div>
+  <div class="when-row portrait-only"><span class="chip">$when_long</span><span class="note">$when_note</span></div>
+  <div class="site-label portrait-only">Schedule, links &amp; past talks:</div>
+  <div class="site portrait-only">$site</div>
+  <div class="telegram portrait-only">
+    <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.94 4.3 18.7 19.6c-.24 1.07-.88 1.34-1.78.83l-4.93-3.63-2.38 2.29c-.26.26-.48.48-.99.48l.35-5.02 9.14-8.26c.4-.35-.09-.55-.62-.2L6.2 13.2l-4.86-1.52c-1.06-.33-1.08-1.06.22-1.57L20.55 2.8c.88-.32 1.65.2 1.39 1.5Z"/></svg>
+    @SingularThinker
+  </div>
+<script>
+  // Network motif, as on the posters: open box, black and green nodes, edges with gaps.
+  var svg = document.querySelector(".motif"), ns = "http://www.w3.org/2000/svg";
+  function add(tag, attrs) {
+    var el = document.createElementNS(ns, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    svg.appendChild(el);
+  }
+  add("path", { d: "M480 3 H3 V129 H480", fill: "none", stroke: "#000", "stroke-width": 6 });
+  var r = 27, nodes = [[80, 62, 0], [190, 138, 1], [270, 38, 0], [380, 112, 1], [455, 10, 0], [478, 140, 0]];
+  [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]].forEach(function (e) {
+    var a = nodes[e[0]], b = nodes[e[1]], dx = b[0] - a[0], dy = b[1] - a[1];
+    var len = Math.sqrt(dx * dx + dy * dy), ux = dx / len, uy = dy / len, gap = r + 14;
+    add("line", { x1: a[0] + ux * gap, y1: a[1] + uy * gap, x2: b[0] - ux * gap, y2: b[1] - uy * gap,
+                  stroke: "#000", "stroke-width": 7, "stroke-linecap": "round" });
+  });
+  nodes.forEach(function (n) { add("circle", { cx: n[0], cy: n[1], r: r, fill: n[2] ? "#44b768" : "#000" }); });
+
+  // Make each text as large as its space allows.
+  function fit(el, box, size, min, widthOnly) {
+    var maxHeight = parseFloat(getComputedStyle(box).maxHeight), limit = isNaN(maxHeight) ? box.clientHeight : maxHeight;
+    el.style.fontSize = size + "px";
+    while (((!widthOnly && el.offsetHeight > limit) || el.scrollWidth > box.clientWidth) && size > min) {
+      size -= 2;
+      el.style.fontSize = size + "px";
+    }
+    return size;
+  }
+  document.fonts.ready.then(function () {
+    var portrait = document.body.classList.contains("portrait");
+    fit(document.querySelector(".title"), document.querySelector(".title-box"), portrait ? 80 : 96, 30);
+    var presenter = document.querySelector(".presenter");
+    fit(presenter, presenter, portrait ? 52 : 46, 28, true);
+    if (portrait) {
+      var site = document.querySelector(".site");
+      fit(site, site, 50, 30, true);
+      // The abstract gets the space that is left. If it is still too long, cut it at the last full line.
+      var abstract = document.querySelector(".abstract"), box = document.querySelector(".abstract-box");
+      var size = fit(abstract, box, 28, 20);
+      abstract.style.webkitLineClamp = Math.floor(box.clientHeight / (size * 1.42));
+    }
+  });
+</script>
+</body>
+</html>
