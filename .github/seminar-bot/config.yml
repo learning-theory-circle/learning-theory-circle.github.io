@@ -6,7 +6,7 @@ organizer: erfunmirzaei         # GitHub user who gets the reminder issues
 organizer_name: Erfan Mirzaei   # name that signs the emails
 
 # Sessions happen every `cadence_days`, starting from `anchor_date`.
-anchor_date: 2026-10-25
+anchor_date: 2026-11-29         # moved from 2026-10-25 when the 22 Nov session was postponed by a week
 cadence_days: 14
 time_tehran: "19:00"
 time_utc: "15:30"

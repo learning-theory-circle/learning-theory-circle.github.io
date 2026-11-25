@@ -390,13 +390,15 @@ def cmd_run(args):
 
     today = args.today or dt.datetime.now(ZoneInfo("Asia/Tehran")).date()
     session = next_session(today, cfg)
+    # A talk moved off the cycle (for example, postponed by a week) is the next session if it comes first.
+    session = min([t["date"] for t in talks if today <= t["date"] < session], default=session)
     days_left = (session - today).days
     talk = talk_on(talks, session)
     previous = talk_before(talks, session)
     print(f"Today {today}. Next session {session} ({days_left} days). "
           f"Talk: {talk['id'] if talk else 'missing'}.")
 
-    # Close issues whose task the data in talks.yml shows as done.
+    # Close issues whose task is done, or no longer needed because the schedule changed.
     by_id = {t["id"]: t for t in talks}
     for key, issue in list(bot.issues.items()):
         if issue.get("state") != "open":
@@ -404,6 +406,11 @@ def cmd_run(args):
         kind, _, ref = key.partition(":")
         if kind == "talk-data" and talk_on(talks, dt.date.fromisoformat(ref)):
             bot.close(key, f"The talk for {ref} is now in `_data/talks.yml`. Closing.")
+        elif kind == "talk-data" and next_session(dt.date.fromisoformat(ref), cfg) != dt.date.fromisoformat(ref):
+            bot.close(key, f"The schedule changed: there is no session on {ref} now. Closing.")
+        elif kind.startswith("email-") and (dt.date.fromisoformat(ref) < today
+                                            or not talk_on(talks, dt.date.fromisoformat(ref))):
+            bot.close(key, f"The session of {ref} is over or was moved. Closing.")
         elif kind == "video" and by_id.get(ref, {}).get("video"):
             bot.close(key, f"The video of `{ref}` is now on the website. Closing.")
 
